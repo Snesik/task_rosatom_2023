@@ -7,6 +7,7 @@ import requests
 
 
 def get_my_ip() -> str:
+    #получить ip
     return requests.get('https://ifconfig.me').text
 
 

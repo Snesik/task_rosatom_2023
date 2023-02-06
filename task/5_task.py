@@ -6,18 +6,18 @@
 - Each subsection is supposed to be interpreted as a number, therefore 1.10 > 1.1
 """
 
-version_a = '1.10'
-version_b = '1.1'
+from pkg_resources import parse_version
 
 
-def check_versions(a, b):
-    a, b = float(a), float(b)
-    if a < b:
-        print(-1)
-    elif a == b:
-        print(0)
-    elif a > b:
-        print(1)
+def check_version(first: str, second: str) -> int:
+    if parse_version(first) == parse_version(second):
+        return 0
+    if parse_version(first) > parse_version(second):
+        return 1
+    if parse_version(first) < parse_version(second):
+        return -1
 
 
-check_versions(version_a, version_b)
+if __name__ == '__main__':
+    a, b = input('Введите первую версию'), input('Введите вторую версию')
+    print(check_version(a, b))

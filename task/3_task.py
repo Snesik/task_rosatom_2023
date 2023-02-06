@@ -51,7 +51,7 @@ def get_html(href: str, headers: dict) -> Response:
 
 
 if __name__ == '__main__':
-    response = get_html('https://greenatom.ru', HEADERS).text
+    response = get_html('https://greenatom.ru', HEADERS)
     parser = SearchTags()
-    parser.feed(response)
+    parser.feed(response.text)
     print(f'Тегов {parser.count_tag}    Тегов с атрибутами {parser.count_attrs}')
