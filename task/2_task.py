@@ -18,7 +18,7 @@ def create_handlers(callback: Callable) -> list:
     return handlers
 
 
-def execute_handlers(handlers):
+def execute_handlers(handlers) -> None:
     # Запускаем добавленный обработчики (шаги от 0 до 4)
     for handler in handlers:
         handler()
