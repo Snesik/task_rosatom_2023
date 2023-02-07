@@ -3,11 +3,9 @@
 Сколько из них содержит атрибуты? Напиши скрипт на Python, который выводит ответы на вопросы выше
 """
 
-import requests
-
 from html.parser import HTMLParser
 
-from requests import Response
+from requests import Response, get
 
 HEADERS = {
     'Host': 'greenatom.ru',
@@ -47,7 +45,7 @@ class SearchTags(HTMLParser):
 
 def get_html(href: str, headers: dict) -> Response:
     # запрос сайта
-    return requests.get(href, headers=headers)
+    return get(href, headers=headers)
 
 
 if __name__ == '__main__':

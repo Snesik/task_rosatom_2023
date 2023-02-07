@@ -1,37 +1,31 @@
-import json
-
 import requests
 
-headers = {'content-type': 'application/x-www-form-urlencoded'}
 
-body = """
-query Ships {
-  ships {
-    model
-    name
-    type
-    status
+LAUNCHES = """
+query Launches {
+  launches {
+    id
+    details
+    is_tentative
+    launch_date_local
+    launch_date_utc
+  launch_date_unix
+    mission_id
+    mission_name
   }
 }
 """
 body1 = """
-query Dragons {
-  dragons {
-    name
-    first_flight
-    diameter {
-      feet
-    }
-    launch_payload_mass {
-      lb
-    }
+query Query {
+  missions {
+    id
   }
 }
 """
 
 
 
-b = json.dumps(body)
+#b = json.dumps(body)
 
-a = requests.post('https://spacex-production.up.railway.app/', json={'query': body1})
+a = requests.post('https://spacex-production.up.railway.app/',  json={'query': LAUNCHES}).json()
 print()

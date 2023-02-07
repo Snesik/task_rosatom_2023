@@ -19,5 +19,5 @@ def check_version(first: str, second: str) -> int:
 
 
 if __name__ == '__main__':
-    a, b = input('Введите первую версию'), input('Введите вторую версию')
+    a, b = input('Введите первую версию '), input('Введите вторую версию ')
     print(check_version(a, b))
