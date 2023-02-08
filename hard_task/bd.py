@@ -6,9 +6,10 @@ from sqlalchemy import (
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker, backref
 
 ENGINE = 'postgresql://admin:01233210@localhost:5432/SpaceX'
-Base = declarative_base()
 engine = create_engine(ENGINE, echo=True)
-Session = sessionmaker(engine)
+session = sessionmaker(engine)
+
+Base = declarative_base()
 
 
 class Rockets(Base):
@@ -30,5 +31,5 @@ from download_data import *
 
 a = get_data_api([LAUNCHES, MISSIONS, ROCKETS], API)
 
-with Session() as session:
+with session() as session:
     session.add(RocketsModel(**a['rockets'][0]))
