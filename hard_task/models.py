@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Rockets(BaseModel):
+class RocketsModel(BaseModel):
     active: bool
     boosters: int
     company: str

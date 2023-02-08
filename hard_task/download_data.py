@@ -3,7 +3,7 @@ import json
 import requests
 
 from variables import LAUNCHES, MISSIONS, ROCKETS, API
-from models import Rockets
+from models import RocketsModel
 
 
 def get_data_api(api_requests: list, href: str) -> dict:
@@ -14,11 +14,9 @@ def get_data_api(api_requests: list, href: str) -> dict:
     """
     results = {}
     for query in api_requests:
-        response = requests.post(href, json={'query': query}).text
+        response = requests.post(href, json={'query': query}, timeout=20).text
         results.update(json.loads(response)['data'])
     return results
 
 
 data = get_data_api([LAUNCHES, MISSIONS, ROCKETS], API)
-
-print()

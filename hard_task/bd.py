@@ -2,7 +2,6 @@ from sqlalchemy import (
     String, Column, DateTime, ForeignKey,
     Integer, create_engine, Boolean, delete, update
 )
-import psycopg2
 
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker, backref
 
@@ -28,7 +27,8 @@ class Rockets(Base):
 Base.metadata.create_all(engine)
 
 from download_data import *
+
 a = get_data_api([LAUNCHES, MISSIONS, ROCKETS], API)
 
 with Session() as session:
-    session.query(Rockets(**a['rockets'][0])).add()
+    session.add(RocketsModel(**a['rockets'][0]))

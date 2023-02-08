@@ -45,7 +45,7 @@ class SearchTags(HTMLParser):
 
 def get_html(href: str, headers: dict) -> Response:
     # запрос сайта
-    return get(href, headers=headers)
+    return get(href, headers=headers, timeout=20)
 
 
 if __name__ == '__main__':
