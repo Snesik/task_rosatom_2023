@@ -1,22 +1,41 @@
+import requests
 import json
 
-import requests
+from graphql_query import Operation, Query
 
-from variables import LAUNCHES, MISSIONS, ROCKETS, API
-from models import RocketsModel
+API = 'https://spacex-production.up.railway.app/'
+launches = Query(
+    name='launches', fields=[
+        'id', 'details', 'is_tentative',
+        'launch_date_local', 'launch_date_utc',
+        'mission_name', 'launch_success', 'launch_year',
+        'static_fire_date_utc', 'tentative_max_precision',
+        'upcoming'
+    ]
+)
+rockets = Query(
+    name='rockets', fields=[
+        'id', 'active', 'boosters',
+        'cost_per_launch', 'stages',
+        'success_rate_pct', 'type', 'wikipedia'
+    ]
+)
+
+missions = Query(
+    name='missions', fields=[
+        'id', 'description', 'manufacturers',
+        'name', 'twitter', 'website', 'wikipedia'
+    ]
+)
+
+operation = Operation(type='query', queries=[launches, rockets, missions])
 
 
-def get_data_api(api_requests: list, href: str) -> dict:
-    """
-    :param api_requests: list query
-    :param href: str url
-
-    """
+def get_data_api(query: Operation, href: str) -> dict:
     results = {}
-    for query in api_requests:
-        response = requests.post(href, json={'query': query}, timeout=20).text
-        results.update(json.loads(response)['data'])
+    response = requests.post(href, json={'query': query.render()}, timeout=20).text
+    results.update(json.loads(response)['data'])
     return results
 
 
-data = get_data_api([LAUNCHES, MISSIONS, ROCKETS], API)
+

@@ -1,9 +1,9 @@
 from sqlalchemy import (
-    String, Column, DateTime, ForeignKey,
-    Integer, create_engine, Boolean, delete, update
+    String, Column, DateTime,
+    Integer, create_engine, Boolean
 )
 
-from sqlalchemy.orm import declarative_base, relationship, sessionmaker, backref
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 ENGINE = 'postgresql://admin:01233210@localhost:5432/SpaceX'
 engine = create_engine(ENGINE, echo=True)
@@ -25,11 +25,36 @@ class Rockets(Base):
     wikipedia = Column(String)
 
 
+class Launches(Base):
+    __tablename__ = 'launches'
+    id = Column(String, primary_key=True, index=True)
+    details = Column(String)
+    is_tentative = Column(Boolean)
+    launch_date_local = Column(DateTime)
+    launch_date_utc = Column(DateTime)
+    launch_success = Column(Boolean)
+    launch_year = Column(String)
+    mission_name = Column(String)
+    static_fire_date_utc = Column(DateTime)
+    tentative_max_precision = Column(String)
+    upcoming = Column(Boolean)
+
+
+class Missions(Base):
+    __tablename__ = 'missions'
+    id = Column(String, primary_key=True, index=True)
+    description = Column(String)
+    manufacturers = Column(String)
+    name = Column(String)
+    twitter = Column(String)
+    website = Column(String)
+    wikipedia = Column(String)
+
+
 Base.metadata.create_all(engine)
 
-from download_data import *
 
-a = get_data_api([LAUNCHES, MISSIONS, ROCKETS], API)
 
-with session() as session:
-    session.add(RocketsModel(**a['rockets'][0]))
+
+
+
