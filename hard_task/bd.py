@@ -5,7 +5,7 @@ from sqlalchemy import (
 
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-ENGINE = 'postgresql://admin:01233210@localhost:5432/SpaceX'
+ENGINE = 'postgresql://admin:01233210@postgres:5432/SpaceX'
 engine = create_engine(ENGINE, echo=True)
 session = sessionmaker(engine)
 
