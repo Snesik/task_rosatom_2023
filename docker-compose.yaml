@@ -17,7 +17,7 @@ services:
 
 
   app_rosatom:
-    image: snesik/app_rosatom_v2
+    image: snesik/app_rosatom_v3
     depends_on:
      bd:
       condition: service_healthy
